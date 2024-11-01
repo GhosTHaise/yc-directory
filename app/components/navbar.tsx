@@ -6,7 +6,7 @@ import React from 'react'
 const Navbar = async () => {
     const session = await auth()
     return (
-        <div className='px-5 py-3 bg-white shadow-sm font-work-sans'>
+        <div className='px-5 py-3 bg-white shadow-sm font-worksans'>
             <nav className='flex justify-between items-center'>
                 <Link href='/'>
                     <Image loading='lazy' src='/logo.svg' width={144} height={30} alt='logo' />
