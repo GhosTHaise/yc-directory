@@ -1,4 +1,4 @@
-import SearchForm from "@/app/components/searchForm";
+import SearchForm from "@/components/searchForm";
 
 export default async function Home({ searchParams} : {
   searchParams : Promise<{query? : string}>
