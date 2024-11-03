@@ -1,10 +1,12 @@
 import { formatDate } from '@/lib/utils'
 import { EyeIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { Button } from './ui/button'
 
 const StartupCard = ({post } : {post : any}) => {
-    const { _createAt, views, author : { _id : authorId, name }, image, category, title, _id } = post;
+    const { _createAt, views, author : { _id : authorId, name }, description, image, category, title, _id } = post;
   return (
     <li className='startup-card group'>
         <div className='flex-between'>
@@ -30,6 +32,38 @@ const StartupCard = ({post } : {post : any}) => {
                     </h3>
                 </Link>
             </div>
+            <Link href={`/user/${authorId}`}>
+                <Image 
+                    src={"https://placehold.co/48x48"} 
+                    height={48} 
+                    width={48} 
+                    alt='startup' 
+                    className='rounded-full'/>
+            </Link>
+        </div>
+        <Link href={`/startup/${_id}`}>
+            <p className='startup-card_desc'>
+                {description}
+            </p>
+
+            <img
+                src={image}
+                alt='placeholder'
+                className='startup-card_img'
+            />
+        </Link>
+
+        <div className='flex-between gap-3 mt-5'>
+            <Link href={`/?query/${category.toLowerCase()}`}>
+                <p className='text-16-medium'>
+                    {category}
+                </p>
+            </Link>
+            <Button className='startup-card_btn' asChild>
+                <Link href={`/startup/${_id}`}>
+                    Details
+                </Link>
+            </Button>
         </div>
     </li>
   )

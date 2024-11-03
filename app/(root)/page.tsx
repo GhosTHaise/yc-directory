@@ -14,7 +14,7 @@ export default async function Home({ searchParams }: {
       author: { _id: 1 , name : 'fitia' },
       _id: 1,
       description: "desc",
-      image: "https://images.unsplash.com/photo-1646876723939-6d1f7a6a3f5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1350&q=80",
+      image: "https://img.freepik.com/photos-gratuite/vue-du-robot-graphique-3d_23-2150849173.jpg",
       category: "Category",
       title: "robots --- 0 "
     }
