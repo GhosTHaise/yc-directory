@@ -4,14 +4,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
+import { Author, Startup } from '@/sanity/types'
 
-const StartupCard = ({post } : {post : any}) => {
-    const { _createAt, views, author : { _id : authorId, name }, description, image, category, title, _id } = post;
+export type StartupTypeCard = Omit<Startup, "author"> & { author : Author }
+
+const StartupCard = ({post } : {post : StartupTypeCard}) => {
+    const { _createdAt, views, author : { _id : authorId, name }, description, image, category, title, _id } = post;
   return (
     <li className='startup-card group'>
         <div className='flex-between'>
             <p className='startup_card_date'>
-                {formatDate(_createAt)}
+                {formatDate(_createdAt)}
             </p>
             <div className='flex gap-1.5'>
                 <EyeIcon className='size-6 text-primary'/>
@@ -54,7 +57,7 @@ const StartupCard = ({post } : {post : any}) => {
         </Link>
 
         <div className='flex-between gap-3 mt-5'>
-            <Link href={`/?query/${category.toLowerCase()}`}>
+            <Link href={`/?query/${category?.toLowerCase()}`}>
                 <p className='text-16-medium'>
                     {category}
                 </p>
