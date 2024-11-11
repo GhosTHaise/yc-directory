@@ -5,6 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import makdownit from "markdown-it"
+import { Suspense } from "react";
+import View from "@/components/view";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const experimental_ppr = true
 
@@ -91,6 +94,14 @@ const StartupPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 </div>
 
                 <hr className="divider" />
+
+                {/*TODO : EDITOR SELECTED STARTUPS */}
+
+                <Suspense fallback={
+                    <Skeleton className="view_skeleton" />
+                }>
+                    <View id={id} />
+                </Suspense>
            </section>
         </>
     )
