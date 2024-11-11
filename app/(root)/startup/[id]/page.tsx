@@ -91,6 +91,8 @@ const StartupPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                 </div>
 
                 <hr className="divider" />
+
+                {/*TODO : EDITOR SELECTED STARTUPS */}
            </section>
         </>
     )
