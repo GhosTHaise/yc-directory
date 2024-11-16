@@ -15,8 +15,8 @@ const Createpage = async () => {
                     Submit Your Startup
                 </h1>
 
-                <StartupForm />
             </section>
+            <StartupForm />
         </>
     )
 }
