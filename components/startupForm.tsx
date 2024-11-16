@@ -3,10 +3,15 @@
 import React, { useState } from 'react'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea';
+import MDEditor from '@uiw/react-md-editor';
+import { Button } from './ui/button';
+import { Send } from 'lucide-react';
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [pitch, setPitch] = React.useState("");
 
+  const isPending = false;
   return (
     <form action={() => { }} className='startup-form'>
       <div>
@@ -22,13 +27,13 @@ const StartupForm = () => {
           placeholder='Startup Title'
           className='startup-form_input' />
 
-      {
-        errors.title && (
-          <p className='startup-form_error'>
-            {errors.title}
-          </p>
-        )
-      }
+        {
+          errors.title && (
+            <p className='startup-form_error'>
+              {errors.title}
+            </p>
+          )
+        }
       </div>
 
       <div>
@@ -44,13 +49,13 @@ const StartupForm = () => {
           placeholder='Startup Title'
           className='startup-form_textarea' />
 
-      {
-        errors.description && (
-          <p className='startup-form_error'>
-            {errors.description}
-          </p>
-        )
-      }
+        {
+          errors.description && (
+            <p className='startup-form_error'>
+              {errors.description}
+            </p>
+          )
+        }
       </div>
 
       <div>
@@ -66,13 +71,13 @@ const StartupForm = () => {
           placeholder='Startup Category (Teach, Health, Education ...)'
           className='startup-form_input' />
 
-      {
-        errors.category && (
-          <p className='startup-form_error'>
-            {errors.category}
-          </p>
-        )
-      }
+        {
+          errors.category && (
+            <p className='startup-form_error'>
+              {errors.category}
+            </p>
+          )
+        }
       </div>
 
       <div>
@@ -88,14 +93,61 @@ const StartupForm = () => {
           placeholder='Startup Image URL'
           className='startup-form_input' />
 
-      {
-        errors.link && (
-          <p className='startup-form_error'>
-            {errors.link}
-          </p>
-        )
-      }
+        {
+          errors.link && (
+            <p className='startup-form_error'>
+              {errors.link}
+            </p>
+          )
+        }
       </div>
+
+      <div data-color-mode="light">
+        <label
+          htmlFor="pitch"
+          className='startup-form_label'>
+          Title
+        </label>
+
+        <MDEditor
+          value={pitch}
+          className='mt-2'
+          onChange={(value) => setPitch(value || '')}
+          id='pitch'
+          preview='edit'
+          height={300}
+          style={{
+            borderRadius: 20 ,
+            overflow: 'hidden'
+          }}
+          textareaProps={{
+            placeholder : 'Briefly describe your idea and what problem it solves'
+          }}
+          previewOptions={{
+            disallowedElements : ['style']
+          }}
+        />
+
+        {
+          errors.pitch && (
+            <p className='startup-form_error'>
+              {errors.pitch}
+            </p>
+          )
+        }
+      </div>
+
+      <Button 
+        type='submit' 
+        className='startup-form_btn text-white'
+        disabled={isPending}
+      >
+        {
+          isPending ? 'Submitting...' : 'Submit Your Pitch'
+        }
+
+        <Send className='size-6 ml-2'  />
+      </Button>
     </form>
   )
 }
