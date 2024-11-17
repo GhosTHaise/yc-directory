@@ -1,19 +1,57 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useActionState } from 'react'
 import { Input } from './ui/input'
 import { Textarea } from './ui/textarea';
 import MDEditor from '@uiw/react-md-editor';
 import { Button } from './ui/button';
 import { Send } from 'lucide-react';
+import { formSchema } from '@/lib/validation';
+import { z } from 'zod';
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = React.useState("");
+  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+    try {
+      const formValues = {
+        title: formData.get('title') as string,
+        description: formData.get('description') as string,
+        category: formData.get('category') as string,
+        link: formData.get('link') as string,
+        pitch: formData.get('pitch') as string
+      }
 
-  const isPending = false;
+      await formSchema.parseAsync(formValues);
+      console.log(formValues);
+
+      //const result = await createIdea(prevState , formData , pitch)
+      //console.log(result)
+
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const fieldErrors = error.flatten().fieldErrors;
+        console.log("🚀 ~ handleFormSubmit ~ fieldErrors:", fieldErrors)
+        
+        setErrors(fieldErrors as unknown as Record<string, string>);
+
+        return { ...prevState, error: "Validation Failed", status: 'ERROR' };
+      }
+
+      return { ...prevState, error: "An unexpercted error has occured", status: 'ERROR' };
+    }
+  };
+
+  const [state, formAction, isPending] = useActionState(
+    handleFormSubmit,
+    {
+      error: '',
+      status: 'INITIAL'
+    }
+  )
+
   return (
-    <form action={() => { }} className='startup-form'>
+    <form action={formAction} className='startup-form'>
       <div>
         <label
           htmlFor="title"
@@ -117,14 +155,14 @@ const StartupForm = () => {
           preview='edit'
           height={300}
           style={{
-            borderRadius: 20 ,
+            borderRadius: 20,
             overflow: 'hidden'
           }}
           textareaProps={{
-            placeholder : 'Briefly describe your idea and what problem it solves'
+            placeholder: 'Briefly describe your idea and what problem it solves'
           }}
           previewOptions={{
-            disallowedElements : ['style']
+            disallowedElements: ['style']
           }}
         />
 
@@ -137,8 +175,8 @@ const StartupForm = () => {
         }
       </div>
 
-      <Button 
-        type='submit' 
+      <Button
+        type='submit'
         className='startup-form_btn text-white'
         disabled={isPending}
       >
@@ -146,7 +184,7 @@ const StartupForm = () => {
           isPending ? 'Submitting...' : 'Submit Your Pitch'
         }
 
-        <Send className='size-6 ml-2'  />
+        <Send className='size-6 ml-2' />
       </Button>
     </form>
   )
