@@ -13,7 +13,7 @@
   },
   "packageManager": "npm@10.5.2",
   "overrides": {
-    "react": "$react",
+    "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "$react-dom",
     "next": "$next"
   },
@@ -23,6 +23,7 @@
     "@radix-ui/react-toast": "^1.2.2",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.62.3",
+    "@sentry/nextjs": "^8.39.0",
     "@tailwindcss/typography": "^0.5.15",
     "@uiw/react-md-editor": "^4.0.4",
     "class-variance-authority": "^0.7.0",
