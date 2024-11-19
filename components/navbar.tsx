@@ -4,7 +4,8 @@ import Link from 'next/link'
 import React from 'react'
 
 const Navbar = async () => {
-    const session = await auth()
+    const session = await auth();
+    
     return (
         <div className='px-5 py-3 bg-white shadow-sm font-worksans'>
             <nav className='flex justify-between items-center'>
@@ -27,7 +28,7 @@ const Navbar = async () => {
                                         <span>Logout</span>
                                     </button>
                                 </form>
-                                <Link href={`/user/${session?.user?.id}`}>
+                                <Link href={`/user/${session?.id}`}>
                                     <span>{session?.user?.name}</span>
                                 </Link>
                             </>
