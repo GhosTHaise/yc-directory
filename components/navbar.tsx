@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 const Navbar = async () => {
     const session = await auth();
-    
+
     return (
         <div className='px-5 py-3 bg-white shadow-sm font-worksans'>
             <nav className='flex justify-between items-center'>
@@ -25,7 +25,7 @@ const Navbar = async () => {
                                 </Link>
                                 <form action={async () => {
                                     "use server";
-                                    await signOut({redirectTo : "/"})
+                                    await signOut({ redirectTo: "/" })
                                 }}>
                                     <button type="submit">
                                         <span className='max-sm:hidden'>Logout</span>
@@ -38,7 +38,13 @@ const Navbar = async () => {
                                             src={session?.user?.image || ""}
                                             alt={session?.user?.name || ""}
                                         />
-                                        <AvatarFallback>AV</AvatarFallback>
+                                        <AvatarFallback>
+                                            {session?.user?.name
+                                                ?.split(' ')
+                                                .map((n : string) => n[0])
+                                                .join('')
+                                                .toUpperCase() || 'AV'}
+                                        </AvatarFallback>
                                     </Avatar>
                                 </Link>
                             </>
