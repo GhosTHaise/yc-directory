@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import View from "@/components/view";
 import { Skeleton } from "@/components/ui/skeleton";
 import StartupCard, { StartupTypeCard } from "@/components/startupCard";
+import { PLAYLIST_BY_SLUG_QUERYResult } from "@/sanity/types";
 
 export const experimental_ppr = true
 
@@ -16,9 +17,12 @@ const md = makdownit();
 
 const StartupPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const id = (await params).id;
-    const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
+    
+    const [post , {select: editorPosts}] = await Promise.all([
+        client.fetch(STARTUP_BY_ID_QUERY, { id }),
+        client.fetch<PLAYLIST_BY_SLUG_QUERYResult>(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks" })
+    ])
 
-    const { select: editorPosts } = await client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-news" })
 
     if (!post) return notFound();
 

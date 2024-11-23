@@ -17,6 +17,7 @@ const StartupForm = () => {
   const [pitch, setPitch] = React.useState("");
   const { toast } = useToast();
   const router = useRouter();
+
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
       const formValues = {
