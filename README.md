@@ -28,7 +28,7 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-> # Preview
+> ### Preview
 ![yc-directory](https://akrd.net/xZG8ww3xQUoNZ5wA3rBMnj9R6OIEaSpjhKbK2_DypAY)
 
 Full preview on : [www.yc-directory-by-ghost.com](https://yc-directory-snowy-kappa.vercel.app/)
